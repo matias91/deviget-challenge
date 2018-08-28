@@ -1,0 +1,10 @@
+.PostsList {
+  background-color: #24292E;
+  color: #FFF;
+  flex: 0.3;
+}
+
+.PostsList-list {
+  margin: 0;
+  padding: 0;
+}
