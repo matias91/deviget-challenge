@@ -1,0 +1,11 @@
+.Post {
+  background-color: #000;
+  color: #FFF;
+  min-height: 100px;
+  list-style: none;
+}
+
+.Post-title {
+  font-size: 12px;
+}
+
