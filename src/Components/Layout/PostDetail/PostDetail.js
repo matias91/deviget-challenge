@@ -1,9 +1,6 @@
 // @Vendor
 import React, { Component } from 'react';
-
-// @Components
-// import PostsList from '../Layout/PostsList/PostsList';
-// import PostDetail from '../Layout/PostDetail/PostDetail';
+import PropTypes from 'prop-types';
 
 // @Styles
 import './PostDetail.css';
@@ -27,6 +24,10 @@ class PostDetail extends Component {
       </article>
     );
   }
+}
+
+PostDetail.propTypes = {
+  post: PropTypes.object
 }
 
 export default PostDetail;

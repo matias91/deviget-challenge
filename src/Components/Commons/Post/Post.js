@@ -2,10 +2,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-// @Components
-// import PostsList from '../Layout/PostsList/PostsList';
-// import PostDetail from '../Layout/PostDetail/PostDetail';
-
 // @Styles
 import './Post.css';
 
@@ -22,8 +18,9 @@ class Post extends Component {
   }
 
   showDetails(evt) {
-    evt.preventDefault();
     const { index, selectCallback } = this.props;
+
+    evt.preventDefault();
 
     this.setState(
       { read: true },
@@ -32,18 +29,20 @@ class Post extends Component {
   }
 
   dismiss(evt) {
+    const { index, dismissCallback } = this.props;
+
     evt.preventDefault();
     evt.stopPropagation();
-    const { index, dismissCallback } = this.props;
+
     dismissCallback(index);
   }
 
   render() {
     const { read } = this.state;
     const { post } = this.props;
-    const thumbnailElem = post.thumbnail && <img className='Post-thumbnail' src={post.thumbnail} alt='thumbnail' />
     const statusElem = !read && <span className='Post-status'></span>
     const createdDate = new Date(post.created).toLocaleDateString();
+    const thumbnailElem = post.thumbnail && <img className='Post-thumbnail' src={post.thumbnail} alt='thumbnail' />
 
     return (
       <li className='Post' onClick={this.showDetails}>
