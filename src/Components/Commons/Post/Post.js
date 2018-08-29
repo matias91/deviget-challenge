@@ -1,5 +1,6 @@
 // @Vendor
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 // @Components
 // import PostsList from '../Layout/PostsList/PostsList';
@@ -17,26 +18,36 @@ class Post extends Component {
     }
 
     this.showDetails = this.showDetails.bind(this);
+    this.dismiss = this.dismiss.bind(this);
+  }
+
+  showDetails(evt) {
+    evt.preventDefault();
+    const { index, selectCallback } = this.props;
+
+    this.setState(
+      { read: true },
+      () => selectCallback(index)
+    );
   }
 
   dismiss(evt) {
     evt.preventDefault();
-    console.log('dismissed');
-  }
-
-  showDetails() {
-    const { index, selectCallback } = this.props;
-    selectCallback(index);
+    evt.stopPropagation();
+    const { index, dismissCallback } = this.props;
+    dismissCallback(index);
   }
 
   render() {
+    const { read } = this.state;
     const { post } = this.props;
     const thumbnailElem = post.thumbnail && <img className='Post-thumbnail' src={post.thumbnail} alt='thumbnail' />
+    const statusElem = !read && <span className='Post-status'></span>
 
     return (
       <li className='Post' onClick={this.showDetails}>
         <header className='Post-header'>
-          <span className='Post-status'></span>
+          {statusElem}
           <span className='Post-author'>{post.author}</span>
           {/* <span className='Post-date'>{post.author}</span> */}
         </header>
@@ -59,6 +70,13 @@ class Post extends Component {
       </li>
     );
   }
+}
+
+Post.propTypes = {
+  dismissCallback: PropTypes.func,
+  index: PropTypes.number,
+  post: PropTypes.object,
+  selectCallback: PropTypes.func
 }
 
 export default Post;
