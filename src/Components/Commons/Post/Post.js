@@ -15,16 +15,47 @@ class Post extends Component {
     this.state = {
       read: false
     }
+
+    this.showDetails = this.showDetails.bind(this);
+  }
+
+  dismiss(evt) {
+    evt.preventDefault();
+    console.log('dismissed');
+  }
+
+  showDetails() {
+    const { index, selectCallback } = this.props;
+    selectCallback(index);
   }
 
   render() {
-    const { data } = this.props;
+    const { post } = this.props;
+    const thumbnailElem = post.thumbnail && <img className='Post-thumbnail' src={post.thumbnail} alt='thumbnail' />
 
     return (
-      <li className="Post">
-        <div>{data.author}</div>
-        <div className="Post-title">{data.title}</div>
-        <div>{data.num_comments}</div>
+      <li className='Post' onClick={this.showDetails}>
+        <header className='Post-header'>
+          <span className='Post-status'></span>
+          <span className='Post-author'>{post.author}</span>
+          {/* <span className='Post-date'>{post.author}</span> */}
+        </header>
+        <section className='Post-body'>
+          {thumbnailElem}
+          <span className='Post-title'>{post.title}</span>
+          <span className='Post-arrow'></span>
+        </section>
+        <footer className='Post-footer'>
+          <div>
+            <button className='Post-button' onClick={this.dismiss}>
+              <span className='Post-dismiss'>X</span>
+              <span> Dismiss Post</span>
+            </button>
+          </div>
+          <div>
+            <span className='Post-comments'>{post.num_comments} comments</span>
+          </div>
+        </footer>
       </li>
     );
   }
