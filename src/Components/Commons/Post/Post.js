@@ -43,13 +43,14 @@ class Post extends Component {
     const { post } = this.props;
     const thumbnailElem = post.thumbnail && <img className='Post-thumbnail' src={post.thumbnail} alt='thumbnail' />
     const statusElem = !read && <span className='Post-status'></span>
+    const createdDate = new Date(post.created).toLocaleDateString();
 
     return (
       <li className='Post' onClick={this.showDetails}>
         <header className='Post-header'>
           {statusElem}
           <span className='Post-author'>{post.author}</span>
-          {/* <span className='Post-date'>{post.author}</span> */}
+          <span className='Post-date'>{createdDate}</span>
         </header>
         <section className='Post-body'>
           {thumbnailElem}

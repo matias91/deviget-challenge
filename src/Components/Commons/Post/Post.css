@@ -26,6 +26,10 @@
   margin-left: 30px;
 }
 
+.Post-date {
+  margin-left: 20px;
+}
+
 .Post-body {
   align-items: center;
   display: flex;
