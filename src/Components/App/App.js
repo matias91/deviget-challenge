@@ -21,10 +21,23 @@ class App extends Component {
     }
 
     this.onSelect = this.onSelect.bind(this);
+    this.onDissmiss = this.onDissmiss.bind(this);
+    this.onDissmissAll = this.onDissmissAll.bind(this);
   }
 
   onSelect(index) {
     this.setState({ selectedPost: this.state.posts[index].data })
+  }
+
+  onDissmiss(dismissIndex) {
+    this.setState({
+      posts: this.state.posts.filter( (post, index) => index !== dismissIndex ),
+      selectedPost: null
+    })
+  }
+
+  onDissmissAll() {
+    this.setState({ posts: null })
   }
 
   render() {
@@ -33,7 +46,12 @@ class App extends Component {
 
     return (
       <main className='App'>
-        <PostsList posts={posts} selectCallback={this.onSelect} />
+        <PostsList
+          posts={posts}
+          selectCallback={this.onSelect}
+          dismissCallback={this.onDissmiss}
+          dismissAllCallback={this.onDissmissAll}
+        />
 
         {details}
       </main>
